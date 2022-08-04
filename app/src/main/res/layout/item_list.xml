@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:elevation="@dimen/cardview_elevation"
+    android:layout_marginTop="@dimen/common_padding_min"
+    android:layout_marginBottom="@dimen/common_padding_default"
+    app:cardCornerRadius="11dp"
+    app:cardUseCompatPadding="true"
+    android:backgroundTint="@color/Ebony_Clay"
+    android:focusable="true"
+    android:clickable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="@dimen/image_view_anchor"
+            android:layout_height="@dimen/image_view_height"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.3" />
+
+        <TextView
+            android:id="@+id/titleMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre de la pelicula"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            app:layout_constraintStart_toStartOf="@id/ivPhoto"
+            app:layout_constraintEnd_toEndOf="@id/ivPhoto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivPhoto"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/common_padding_min"
+            android:layout_marginBottom="@dimen/common_padding_min"
+            android:textColor="@color/Languid_Lavender"
+            android:layout_marginTop="@dimen/common_padding_default"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

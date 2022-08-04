@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainMoviesFragment">
+
+    <fragment
+        android:id="@+id/mainMoviesFragment"
+        android:name="com.example.alkemyproyect.MainMoviesFragment"
+        android:label="fragment_main_movies"
+        tools:layout="@layout/fragment_main_movies" >
+        <action
+            android:id="@+id/action_mainMoviesFragment_to_detailsMovieFragment"
+            app:destination="@id/detailsMovieFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsMovieFragment"
+        android:name="com.example.alkemyproyect.DetailsMovieFragment"
+        android:label="fragment_details_movie"
+        tools:layout="@layout/fragment_details_movie" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="id2"
+            app:argType="string"
+            android:defaultValue="null" />
+    </fragment>
+</navigation>
