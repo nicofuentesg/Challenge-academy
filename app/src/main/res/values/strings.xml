@@ -5,4 +5,6 @@
     <string name="botton_text_play">VER AHORA</string>
     <string name="key">key</string>
     <string name="duration">"Duracion: "</string>
+    <string name="dialog_alert_erro">Ups... ocurrio un error y no se pudo conectar al servidor :(</string>
+    <string name="title">Error</string>
 </resources>

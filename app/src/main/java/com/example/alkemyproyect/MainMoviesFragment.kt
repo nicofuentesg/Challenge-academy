@@ -1,5 +1,6 @@
 package com.example.alkemyproyect
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.alkemyproyect.databinding.FragmentMainMoviesBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,7 +42,6 @@ class MainMoviesFragment : Fragment(),OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         loadMovies()
-
     }
 
 
@@ -55,7 +57,7 @@ class MainMoviesFragment : Fragment(),OnClickListener {
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit()
                 .create(APIResponse::class.java)
-                .getMyMovies(Constants.API_PATH + Constants.API_POPULAR )
+                .getMyMovies(Constants.API_PATH + Constants.API_POPULAR  + "s" )
 
             val movie: MovieResponse? = call.body()
 
@@ -67,6 +69,12 @@ class MainMoviesFragment : Fragment(),OnClickListener {
                     binding.progressBar.visibility = View.GONE
                     initMovie(movies)
                 }else{
+                    MaterialAlertDialogBuilder(requireContext()).setTitle(R.string.title)
+                        .setView(layoutInflater.inflate(R.layout.dialog_alert, null)).setCancelable(false)
+                        .setPositiveButton("reintentar...",  { dialogInterface, i ->
+                           onDestroy()
+                        })
+                        .show()
                     //show error
                 }
             }
@@ -91,6 +99,10 @@ class MainMoviesFragment : Fragment(),OnClickListener {
         args.putLong(getString(R.string.key), movie.id.toLong())
         val bundle = bundleOf(getString(R.string.key) to movie.id.toString())
         findNavController().navigate(R.id.action_mainMoviesFragment_to_detailsMovieFragment,args)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }
