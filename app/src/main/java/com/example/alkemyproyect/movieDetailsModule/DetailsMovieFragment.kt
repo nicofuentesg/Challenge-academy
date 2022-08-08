@@ -1,4 +1,4 @@
-package com.example.alkemyproyect
+package com.example.alkemyproyect.movieDetailsModule
 
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.alkemyproyect.common.APIResponse
+import com.example.alkemyproyect.common.Constants
+import com.example.alkemyproyect.R
 import com.example.alkemyproyect.databinding.FragmentDetailsMovieBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

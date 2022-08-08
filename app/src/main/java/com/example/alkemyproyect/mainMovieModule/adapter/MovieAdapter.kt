@@ -1,8 +1,11 @@
-package com.example.alkemyproyect
+package com.example.alkemyproyect.mainMovieModule.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.alkemyproyect.movieDetailsModule.Movie
+import com.example.alkemyproyect.R
+import com.example.alkemyproyect.mainMovieModule.OnClickListener
 
 class MovieAdapter(val movie:List<Movie>, var listener: OnClickListener): RecyclerView.Adapter<MovieViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {

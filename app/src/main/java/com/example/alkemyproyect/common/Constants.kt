@@ -1,4 +1,4 @@
-package com.example.alkemyproyect
+package com.example.alkemyproyect.common
 
 object Constants {
         //https://api.themoviedb.org/3/movie/popular?api_key=f257b4b2339e8283c07979a755aa7d04
