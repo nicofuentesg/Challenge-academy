@@ -20,6 +20,5 @@ class MovieViewHolder(view: View): RecyclerView.ViewHolder(view) {
             .fitCenter()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(binding.ivPhoto)
-        Log.i("Url valor" , Constants.BASE_URL_JPG + movie.posterPath  )
     }
 }
