@@ -1,4 +1,4 @@
-package com.example.alkemyproyect.common
+package com.example.alkemyproyect.mainMovieModule.view.utils
 
 object Constants {
 

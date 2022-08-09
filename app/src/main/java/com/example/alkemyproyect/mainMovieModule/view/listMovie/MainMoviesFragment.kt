@@ -1,30 +1,21 @@
-package com.example.alkemyproyect.mainMovieModule
+package com.example.alkemyproyect.mainMovieModule.view.listMovie
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkInfo
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.alkemyproyect.*
-import com.example.alkemyproyect.common.APIResponse
-import com.example.alkemyproyect.common.Constants
 import com.example.alkemyproyect.databinding.FragmentMainMoviesBinding
-import com.example.alkemyproyect.mainMovieModule.adapter.MovieAdapter
-import com.example.alkemyproyect.movieDetailsModule.Movie
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.example.alkemyproyect.mainMovieModule.view.adapter.MovieAdapter
+import com.example.alkemyproyect.mainMovieModule.viewModels.listMovieViewModels.MovieViewModel
+import com.example.alkemyproyect.mainMovieModule.model.Movie
 
 
 class MainMoviesFragment : Fragment(), OnClickListener {
@@ -34,6 +25,7 @@ class MainMoviesFragment : Fragment(), OnClickListener {
 
     private var bandera = true
 
+    val viewModel by viewModels<MovieViewModel>()
 
 
 
@@ -41,17 +33,43 @@ class MainMoviesFragment : Fragment(), OnClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMainMoviesBinding.inflate(layoutInflater)
-        // Inflate the layout for this fragment
+        _binding = FragmentMainMoviesBinding.inflate(inflater, container, false)
+
+       setupViewModel()
         return binding.root
     }
 
+    private fun setupViewModel() {
+
+      viewModel.getMovies()
+        viewModel.movieList.observe(viewLifecycleOwner, Observer {movie ->
+            initMovie(movie)
+        })
+        viewModel.error.observe(viewLifecycleOwner, Observer {movie ->
+            Log.i("valor", movie)
+        })
+        viewModel.isloading.observe(viewLifecycleOwner, Observer {movie ->
+            if (movie) binding.progressBar.visibility = View.VISIBLE
+            else binding.progressBar.visibility = View.GONE
+
+        })
+
+    }
+
+    private fun initMovie(movie: List<Movie>) {
+        val decoration = DividerItemDecoration(context, GridLayoutManager(context,3).orientation )
+        binding.recyclerView.layoutManager = GridLayoutManager(context,2)
+        binding.recyclerView.setHasFixedSize(true)
+        binding.recyclerView.adapter = MovieAdapter(movie, this)
+        binding.recyclerView.addItemDecoration(decoration)
+    }
+/*
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         connecting()
-    }
+    }*/
 
-    private fun connecting(){
+  /*  private fun connecting(){
         if (isConnected(requireContext())){
             bandera = false
             loadMovies()
@@ -73,8 +91,8 @@ class MainMoviesFragment : Fragment(), OnClickListener {
         }
 
 
-    }
-    private fun isConnected(requireContext: Context): Boolean {
+    }*/
+    /*private fun isConnected(requireContext: Context): Boolean {
         val cm = requireContext.getSystemService(Context.CONNECTIVITY_SERVICE)  as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
@@ -86,9 +104,9 @@ class MainMoviesFragment : Fragment(), OnClickListener {
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
+    }*/
 
-    private fun loadMovies(){
+   /* private fun loadMovies(){
 
         CoroutineScope(Dispatchers.IO).launch {
             val call = getRetrofit()
@@ -117,15 +135,9 @@ class MainMoviesFragment : Fragment(), OnClickListener {
 
         }
 
-    }
+    }*/
 
-    private fun initMovie(movie: List<Movie>) {
-        val decoration = DividerItemDecoration(context, GridLayoutManager(context,3).orientation )
-        binding.recyclerView.layoutManager = GridLayoutManager(context,2)
-        binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.adapter = MovieAdapter(movie, this)
-        binding.recyclerView.addItemDecoration(decoration)
-    }
+
 
 
     override fun onClick(movie: Movie) {

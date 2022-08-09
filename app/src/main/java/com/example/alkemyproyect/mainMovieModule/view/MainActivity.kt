@@ -1,4 +1,4 @@
-package com.example.alkemyproyect
+package com.example.alkemyproyect.mainMovieModule.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

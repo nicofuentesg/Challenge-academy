@@ -1,7 +1,7 @@
-package com.example.alkemyproyect.common
+package com.example.alkemyproyect.mainMovieModule.model
 
-import com.example.alkemyproyect.mainMovieModule.MovieResponse
-import com.example.alkemyproyect.movieDetailsModule.MovieDetailsResponse
+import com.example.alkemyproyect.mainMovieModule.model.MovieResponse
+import com.example.alkemyproyect.mainMovieModule.model.MovieDetailsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Url

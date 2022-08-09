@@ -1,17 +1,17 @@
-package com.example.alkemyproyect.movieDetailsModule
+package com.example.alkemyproyect.mainMovieModule.view.detailsMovie
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.alkemyproyect.common.APIResponse
-import com.example.alkemyproyect.common.Constants
+import com.example.alkemyproyect.mainMovieModule.model.APIResponse
+import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
 import com.example.alkemyproyect.R
 import com.example.alkemyproyect.databinding.FragmentDetailsMovieBinding
+import com.example.alkemyproyect.mainMovieModule.model.MovieDetailsResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

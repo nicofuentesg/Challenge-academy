@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainMoviesFragment"
-        android:name="com.example.alkemyproyect.mainMovieModule.MainMoviesFragment"
+        android:name="com.example.alkemyproyect.mainMovieModule.view.listMovie.MainMoviesFragment"
         android:label="fragment_main_movies"
         tools:layout="@layout/fragment_main_movies" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailsMovieFragment"
-        android:name="com.example.alkemyproyect.movieDetailsModule.DetailsMovieFragment"
+        android:name="com.example.alkemyproyect.mainMovieModule.view.detailsMovie.DetailsMovieFragment"
         android:label="fragment_details_movie"
         tools:layout="@layout/fragment_details_movie" >
         <argument
