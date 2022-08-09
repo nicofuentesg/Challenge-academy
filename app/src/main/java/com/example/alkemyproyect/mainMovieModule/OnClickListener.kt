@@ -7,8 +7,5 @@ interface OnClickListener {
     fun onClick(movie: Movie){
 
     }
-    fun onClick2(){
-
-    }
 
 }

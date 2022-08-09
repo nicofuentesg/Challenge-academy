@@ -17,9 +17,8 @@ class MovieAdapter(val movie:List<Movie>, var listener: OnClickListener): Recycl
         val item = movie[position]
         holder.bind(item)
         with(holder.binding.root){
-            setOnLongClickListener { listener.onClick(item)
-                true }
-            setOnClickListener { listener.onClick2() }
+
+            setOnClickListener { listener.onClick(item) }
         }
     }
 

@@ -130,14 +130,10 @@ class MainMoviesFragment : Fragment(), OnClickListener {
 
     override fun onClick(movie: Movie) {
         super.onClick(movie)
-        Toast.makeText(context,"${movie.id}", Toast.LENGTH_LONG).show()
         val args = Bundle()
         args.putLong(getString(R.string.key), movie.id.toLong())
         findNavController().navigate(R.id.action_mainMoviesFragment_to_detailsMovieFragment,args)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
 }

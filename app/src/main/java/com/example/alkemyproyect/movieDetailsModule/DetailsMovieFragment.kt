@@ -38,12 +38,11 @@ class DetailsMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = arguments?.getLong(getString(R.string.key),0)
-        Log.i("valor2", "$id")
 
         if (id != null && id != 0L ) {
             callDetails(id.toInt())
         }
-        Log.i("valor2", "$id")
+
     }
 
     private fun getRetrofit(): Retrofit {
@@ -79,12 +78,14 @@ class DetailsMovieFragment : Fragment() {
             tvDescriptionMovie.text = movieDetails?.overview
             release.text = movieDetails?.releaseDate
             duration.text = getString(R.string.duration) + runtime(movieDetails?.runtime)
+
             Glide.with(ivPhoto.context).load(Constants.BASE_URL_JPG + movieDetails?.posterPath)
                 .centerCrop()
                 .fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.ivPhoto)
-            Log.i("poster", "Constants.BASE_URL_JPG + movieDetails?.posterPath")
+
+
             ratingBar.rating = movieDetails?.voteAverage!!.toFloat()
         }
     }
