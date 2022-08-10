@@ -1,17 +1,25 @@
 package com.example.alkemyproyect.mainMovieModule.view.detailsMovie
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.alkemyproyect.mainMovieModule.model.APIResponse
 import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
 import com.example.alkemyproyect.R
 import com.example.alkemyproyect.databinding.FragmentDetailsMovieBinding
+import com.example.alkemyproyect.databinding.FragmentMainMoviesBinding
 import com.example.alkemyproyect.mainMovieModule.model.MovieDetailsResponse
+import com.example.alkemyproyect.mainMovieModule.viewModels.detailsMovieViewModels.DetailsViewModel
+import com.example.alkemyproyect.mainMovieModule.viewModels.listMovieViewModels.MovieViewModel
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,12 +34,13 @@ class DetailsMovieFragment : Fragment() {
     private var _binding: FragmentDetailsMovieBinding? = null
     private val binding get() = _binding!!
 
+    val viewModel by viewModels<DetailsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDetailsMovieBinding.inflate(layoutInflater)
+        _binding = FragmentDetailsMovieBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -40,41 +49,39 @@ class DetailsMovieFragment : Fragment() {
         val id = arguments?.getLong(getString(R.string.key),0)
 
         if (id != null && id != 0L ) {
-            callDetails(id.toInt())
+            setupViewModel(id.toInt())
         }
 
     }
 
-    private fun getRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL_DETAILS)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
 
+    private fun setupViewModel(id:Int) {
 
-    private fun callDetails(id: Int) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val call = getRetrofit().create(APIResponse::class.java)
-                .getMyMoviesDetails(id.toString() + Constants.API_KEY)
-            val movieDetails: MovieDetailsResponse? = call.body()
+        viewModel.getDetails(id)
 
-            withContext(Dispatchers.Main) {
-                binding.progresBar.visibility = View.GONE
-                bind(movieDetails)
+        viewModel.movieDetail.observe(viewLifecycleOwner, Observer { movieDetails->
+            bind(movieDetails)
+        })
 
-            }
+        viewModel.error.observe(viewLifecycleOwner, Observer { error->
 
-        }
+            MaterialAlertDialogBuilder(requireContext()).setTitle(error)
+                .setView(layoutInflater.inflate(R.layout.dialog_alert,null))
+                .setCancelable(false).setPositiveButton("Salir... ",{ _ , i ->
+                }).show()
 
+        })
 
     }
 
 
+
+
+
+    @SuppressLint("SetTextI18n")
     private fun bind(movieDetails: MovieDetailsResponse?) {
         binding.apply {
 
-            cardView.visibility = View.VISIBLE
             tvDescriptionMovie.text = movieDetails?.overview
             release.text = movieDetails?.releaseDate
             duration.text = getString(R.string.duration) + runtime(movieDetails?.runtime)
@@ -85,21 +92,27 @@ class DetailsMovieFragment : Fragment() {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.ivPhoto)
 
-
             ratingBar.rating = movieDetails?.voteAverage!!.toFloat()
+            cardView.visibility = View.VISIBLE
         }
     }
 
+
     private fun runtime(time:Int?):String{
 
-        var formato:String  = "%02d:%02d";
-        val horas:Long = TimeUnit.MINUTES.toHours(time!!.toLong())
+        val formato: String  = "%02d:%02d";
+        val horas: Long = TimeUnit.MINUTES.toHours(time!!.toLong())
         val minutos: Long = TimeUnit.MINUTES.toMinutes(time.toLong()) - TimeUnit.HOURS.toMinutes(TimeUnit.MINUTES.toHours(time.toLong()))
 
 
         return String.format(formato, horas, minutos)
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }

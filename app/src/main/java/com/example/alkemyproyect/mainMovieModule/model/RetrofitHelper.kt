@@ -12,4 +12,12 @@ object RetrofitHelper {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+     fun getRetrofitDetails(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL_DETAILS)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
 }

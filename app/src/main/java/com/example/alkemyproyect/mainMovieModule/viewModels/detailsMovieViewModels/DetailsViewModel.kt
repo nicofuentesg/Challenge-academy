@@ -1,43 +1,38 @@
-package com.example.alkemyproyect.mainMovieModule.viewModels.listMovieViewModels
+package com.example.alkemyproyect.mainMovieModule.viewModels.detailsMovieViewModels
 
-import androidx.lifecycle.*
-import com.example.alkemyproyect.mainMovieModule.model.RetrofitHelper
+import android.view.View
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.alkemyproyect.mainMovieModule.model.APIResponse
-import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
+import com.example.alkemyproyect.mainMovieModule.model.MovieDetailsResponse
 import com.example.alkemyproyect.mainMovieModule.model.MovieResponse
-import com.example.alkemyproyect.mainMovieModule.model.Movie
+import com.example.alkemyproyect.mainMovieModule.model.RetrofitHelper
+import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
 import kotlinx.coroutines.*
 import retrofit2.HttpException
-import retrofit2.Response
 import java.io.IOException
 
-class MovieViewModel: ViewModel() {
+class DetailsViewModel(): ViewModel() {
 
-    val movieList = MutableLiveData<List<Movie>>()
+    var movieDetail = MutableLiveData<MovieDetailsResponse>()
     var error =  MutableLiveData<String>()
-    var isloading = MutableLiveData<Boolean>()
-    //state de carga
 
-    fun getMovies() {
+
+    fun getDetails(id: Int) {
 
         viewModelScope.launch {
-            isloading.postValue(true)
 
             try {
 
 
-                      var call = RetrofitHelper.getRetrofit()
-                        .create(APIResponse::class.java)
-                        .getMyMovies(Constants.API_PATH + Constants.API_POPULAR)
+                val call = RetrofitHelper.getRetrofitDetails().create(APIResponse::class.java)
+                    .getMyMoviesDetails(id.toString() + Constants.API_KEY)
+                val movieDetails: MovieDetailsResponse = call.body()!!
 
 
-
-
-                val movie: MovieResponse? = call.body()
-                val movies = movie?.movie ?: emptyList()
                 if (call.isSuccessful) {
-                    movieList.postValue(movies)
-
+                    movieDetail.postValue(movieDetails)
                 }
             } catch (throwable: Throwable) {
                 throwable.printStackTrace()
@@ -59,11 +54,10 @@ class MovieViewModel: ViewModel() {
                     }
                 }
             }
-            isloading.postValue(false)
+
 
         }
+
+
     }
-
-
 }
-
