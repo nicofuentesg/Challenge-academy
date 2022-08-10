@@ -8,24 +8,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.alkemyproyect.mainMovieModule.model.APIResponse
 import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
 import com.example.alkemyproyect.R
 import com.example.alkemyproyect.databinding.FragmentDetailsMovieBinding
-import com.example.alkemyproyect.databinding.FragmentMainMoviesBinding
-import com.example.alkemyproyect.mainMovieModule.model.MovieDetailsResponse
+import com.example.alkemyproyect.mainMovieModule.model.listMovieModel.MovieDetailsResponse
 import com.example.alkemyproyect.mainMovieModule.viewModels.detailsMovieViewModels.DetailsViewModel
-import com.example.alkemyproyect.mainMovieModule.viewModels.listMovieViewModels.MovieViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 

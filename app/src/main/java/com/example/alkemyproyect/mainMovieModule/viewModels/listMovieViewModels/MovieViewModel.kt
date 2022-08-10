@@ -1,14 +1,13 @@
 package com.example.alkemyproyect.mainMovieModule.viewModels.listMovieViewModels
 
 import androidx.lifecycle.*
-import com.example.alkemyproyect.mainMovieModule.model.RetrofitHelper
-import com.example.alkemyproyect.mainMovieModule.model.APIResponse
+import com.example.alkemyproyect.mainMovieModule.model.network.RetrofitHelper
+import com.example.alkemyproyect.mainMovieModule.model.network.APIResponse
 import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
-import com.example.alkemyproyect.mainMovieModule.model.MovieResponse
-import com.example.alkemyproyect.mainMovieModule.model.Movie
+import com.example.alkemyproyect.mainMovieModule.model.detailsMovieModel.MovieResponse
+import com.example.alkemyproyect.mainMovieModule.model.listMovieModel.Movie
 import kotlinx.coroutines.*
 import retrofit2.HttpException
-import retrofit2.Response
 import java.io.IOException
 
 class MovieViewModel: ViewModel() {

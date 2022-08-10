@@ -1,7 +1,6 @@
 package com.example.alkemyproyect.mainMovieModule.view.listMovie
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +14,7 @@ import com.example.alkemyproyect.*
 import com.example.alkemyproyect.databinding.FragmentMainMoviesBinding
 import com.example.alkemyproyect.mainMovieModule.view.adapter.MovieAdapter
 import com.example.alkemyproyect.mainMovieModule.viewModels.listMovieViewModels.MovieViewModel
-import com.example.alkemyproyect.mainMovieModule.model.Movie
+import com.example.alkemyproyect.mainMovieModule.model.listMovieModel.Movie
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 

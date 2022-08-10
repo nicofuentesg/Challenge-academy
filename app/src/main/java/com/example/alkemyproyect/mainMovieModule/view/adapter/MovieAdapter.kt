@@ -3,7 +3,7 @@ package com.example.alkemyproyect.mainMovieModule.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.alkemyproyect.mainMovieModule.model.Movie
+import com.example.alkemyproyect.mainMovieModule.model.listMovieModel.Movie
 import com.example.alkemyproyect.R
 import com.example.alkemyproyect.mainMovieModule.view.listMovie.OnClickListener
 

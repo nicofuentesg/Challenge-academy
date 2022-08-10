@@ -1,4 +1,4 @@
-package com.example.alkemyproyect.mainMovieModule.model
+package com.example.alkemyproyect.mainMovieModule.model.network
 
 import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
 import retrofit2.Retrofit
