@@ -4,16 +4,16 @@ import androidx.lifecycle.*
 import com.example.alkemyproyect.mainMovieModule.model.network.RetrofitHelper
 import com.example.alkemyproyect.mainMovieModule.model.network.APIResponse
 import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
-import com.example.alkemyproyect.mainMovieModule.model.detailsMovieModel.MovieResponse
+import com.example.alkemyproyect.mainMovieModule.model.listMovieModel.MovieResponse
 import com.example.alkemyproyect.mainMovieModule.model.listMovieModel.Movie
 import kotlinx.coroutines.*
 import retrofit2.HttpException
 import java.io.IOException
 
-class MovieViewModel: ViewModel() {
+class MovieViewModel : ViewModel() {
 
     val movieList = MutableLiveData<List<Movie>>()
-    var error =  MutableLiveData<String>()
+    var error = MutableLiveData<String>()
     var isloading = MutableLiveData<Boolean>()
     //state de carga
 
@@ -23,13 +23,9 @@ class MovieViewModel: ViewModel() {
             isloading.postValue(true)
 
             try {
-
-
-                      var call = RetrofitHelper.getRetrofit()
-                        .create(APIResponse::class.java)
-                        .getMyMovies(Constants.API_PATH + Constants.API_POPULAR)
-
-
+                var call = RetrofitHelper.getRetrofit()
+                    .create(APIResponse::class.java)
+                    .getMyMovies(Constants.API_PATH + Constants.API_POPULAR)
 
 
                 val movie: MovieResponse? = call.body()

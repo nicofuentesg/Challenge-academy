@@ -13,7 +13,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
 import com.example.alkemyproyect.R
 import com.example.alkemyproyect.databinding.FragmentDetailsMovieBinding
-import com.example.alkemyproyect.mainMovieModule.model.listMovieModel.MovieDetailsResponse
+import com.example.alkemyproyect.mainMovieModule.model.detailsMovieModel.MovieDetailsResponse
 import com.example.alkemyproyect.mainMovieModule.viewModels.detailsMovieViewModels.DetailsViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.util.concurrent.TimeUnit
@@ -36,36 +36,33 @@ class DetailsMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val id = arguments?.getLong(getString(R.string.key),0)
+        val id = arguments?.getLong(getString(R.string.key), 0)
 
-        if (id != null && id != 0L ) {
+        if (id != null && id != 0L) {
             setupViewModel(id.toInt())
         }
 
     }
 
 
-    private fun setupViewModel(id:Int) {
+    private fun setupViewModel(id: Int) {
 
         viewModel.getDetails(id)
 
-        viewModel.movieDetail.observe(viewLifecycleOwner, Observer { movieDetails->
+        viewModel.movieDetail.observe(viewLifecycleOwner, Observer { movieDetails ->
             bind(movieDetails)
         })
 
-        viewModel.error.observe(viewLifecycleOwner, Observer { error->
+        viewModel.error.observe(viewLifecycleOwner, Observer { error ->
 
             MaterialAlertDialogBuilder(requireContext()).setTitle(error)
-                .setView(layoutInflater.inflate(R.layout.dialog_alert,null))
-                .setCancelable(false).setPositiveButton("Salir... ",{ _ , i ->
+                .setView(layoutInflater.inflate(R.layout.dialog_alert, null))
+                .setCancelable(false).setPositiveButton("Salir... ", { _, i ->
                 }).show()
 
         })
 
     }
-
-
-
 
 
     @SuppressLint("SetTextI18n")
@@ -88,11 +85,13 @@ class DetailsMovieFragment : Fragment() {
     }
 
 
-    private fun runtime(time:Int?):String{
+    private fun runtime(time: Int?): String {
 
-        val formato: String  = "%02d:%02d";
+        val formato: String = "%02d:%02d";
         val horas: Long = TimeUnit.MINUTES.toHours(time!!.toLong())
-        val minutos: Long = TimeUnit.MINUTES.toMinutes(time.toLong()) - TimeUnit.HOURS.toMinutes(TimeUnit.MINUTES.toHours(time.toLong()))
+        val minutos: Long = TimeUnit.MINUTES.toMinutes(time.toLong()) - TimeUnit.HOURS.toMinutes(
+            TimeUnit.MINUTES.toHours(time.toLong())
+        )
 
 
         return String.format(formato, horas, minutos)

@@ -26,14 +26,13 @@ class MainMoviesFragment : Fragment(), OnClickListener {
     val viewModel by viewModels<MovieViewModel>()
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMainMoviesBinding.inflate(inflater, container, false)
 
-       setupViewModel()
+        setupViewModel()
 
         return binding.root
     }
@@ -41,19 +40,19 @@ class MainMoviesFragment : Fragment(), OnClickListener {
 
     private fun setupViewModel() {
 
-      viewModel.getMovies()
-        viewModel.movieList.observe(viewLifecycleOwner, Observer {movie ->
+        viewModel.getMovies()
+        viewModel.movieList.observe(viewLifecycleOwner, Observer { movie ->
             initMovie(movie)
         })
-        viewModel.error.observe(viewLifecycleOwner, Observer {error ->
+        viewModel.error.observe(viewLifecycleOwner, Observer { error ->
 
             MaterialAlertDialogBuilder(requireContext()).setTitle(error)
-                .setView(layoutInflater.inflate(R.layout.dialog_alert,null))
-                .setCancelable(false).setPositiveButton("Salir... ",{ _ , i ->
+                .setView(layoutInflater.inflate(R.layout.dialog_alert, null))
+                .setCancelable(false).setPositiveButton("Salir... ", { _, i ->
                     onDestroy()
-            }).show()
+                }).show()
         })
-        viewModel.isloading.observe(viewLifecycleOwner, Observer {success ->
+        viewModel.isloading.observe(viewLifecycleOwner, Observer { success ->
             if (success) binding.progressBar.visibility = View.VISIBLE
             else binding.progressBar.visibility = View.GONE
 
@@ -62,20 +61,19 @@ class MainMoviesFragment : Fragment(), OnClickListener {
     }
 
     private fun initMovie(movie: List<Movie>) {
-        val decoration = DividerItemDecoration(context, GridLayoutManager(context,3).orientation )
-        binding.recyclerView.layoutManager = GridLayoutManager(context,2)
+        val decoration = DividerItemDecoration(context, GridLayoutManager(context, 3).orientation)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = MovieAdapter(movie, this)
         binding.recyclerView.addItemDecoration(decoration)
     }
 
 
-
     override fun onClick(movie: Movie) {
         super.onClick(movie)
         val args = Bundle()
         args.putLong(getString(R.string.key), movie.id.toLong())
-        findNavController().navigate(R.id.action_mainMoviesFragment_to_detailsMovieFragment,args)
+        findNavController().navigate(R.id.action_mainMoviesFragment_to_detailsMovieFragment, args)
     }
 
 

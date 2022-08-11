@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.alkemyproyect.mainMovieModule.model.network.APIResponse
-import com.example.alkemyproyect.mainMovieModule.model.listMovieModel.MovieDetailsResponse
+import com.example.alkemyproyect.mainMovieModule.model.detailsMovieModel.MovieDetailsResponse
 import com.example.alkemyproyect.mainMovieModule.model.network.RetrofitHelper
 import com.example.alkemyproyect.mainMovieModule.view.utils.Constants
 import kotlinx.coroutines.*

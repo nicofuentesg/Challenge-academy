@@ -1,4 +1,4 @@
-package com.example.alkemyproyect.mainMovieModule.model.detailsMovieModel
+package com.example.alkemyproyect.mainMovieModule.model.listMovieModel
 
 
 import com.example.alkemyproyect.mainMovieModule.model.listMovieModel.Movie

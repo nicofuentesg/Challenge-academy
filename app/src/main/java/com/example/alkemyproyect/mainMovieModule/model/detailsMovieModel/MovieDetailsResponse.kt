@@ -1,4 +1,4 @@
-package com.example.alkemyproyect.mainMovieModule.model.listMovieModel
+package com.example.alkemyproyect.mainMovieModule.model.detailsMovieModel
 
 
 import com.google.gson.annotations.SerializedName
