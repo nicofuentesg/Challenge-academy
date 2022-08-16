@@ -7,4 +7,5 @@
     <string name="duration">"Duracion: "</string>
     <string name="dialog_alert_erro">Ups... ocurrio un error y no se pudo conectar al servidor :(</string>
     <string name="title">Error</string>
+    <string name="message_error">Funcion todavía no disponible!!</string>
 </resources>

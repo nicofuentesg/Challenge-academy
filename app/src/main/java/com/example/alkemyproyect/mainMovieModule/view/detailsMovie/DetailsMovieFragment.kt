@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -81,6 +82,7 @@ class DetailsMovieFragment : Fragment() {
 
             ratingBar.rating = movieDetails?.voteAverage!!.toFloat()
             cardView.visibility = View.VISIBLE
+            binding.btnPlayMovie.setOnClickListener { messageError() }
         }
     }
 
@@ -97,6 +99,10 @@ class DetailsMovieFragment : Fragment() {
         return String.format(formato, horas, minutos)
 
 
+    }
+
+    private fun messageError(){
+        Toast.makeText(context,getString(R.string.message_error),Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroy() {
